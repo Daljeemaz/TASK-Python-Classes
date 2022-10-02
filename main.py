@@ -65,3 +65,24 @@ class Customer:
 
 
 customer = Customer("Abdallah", 3, 6)
+    def __init__(self, name, location, money):
+        super().__init__(name, location, money)
+
+    def _is_in_range(self, vendor):
+        distance = vendor.location - self.location
+        if distance > vendor.range:
+            return True
+        else:
+            return False
+
+    def _have_enough_money(self, vendor, number_of_icecreams):
+        if self.wallet.money >= vendor.price * number_of_icecreams:
+            return True
+        else:
+            return False
+
+    def request_icecream(self, vendor, number_of_icecreams):
+        if self._is_in_range(vendor) and self._have_enough_money(
+            vendor, number_of_icecreams
+        ):
+            vendor.sellTo(self, number_of_icecreams)
